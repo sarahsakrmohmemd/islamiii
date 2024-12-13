@@ -7,6 +7,7 @@ abstract class AppStyles {
 
   static TextStyle semiBoldAccent = const TextStyle(
       fontSize: 25, fontWeight: FontWeight.w600, color: AppColors.accent);
+
   static TextStyle regularAccent = const TextStyle(
       fontSize: 25, fontWeight: FontWeight.w400, color: AppColors.accent);
 }

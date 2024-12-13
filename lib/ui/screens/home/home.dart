@@ -1,68 +1,55 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../../providers/theme_provider.dart';
+import '../../utils/app_colors.dart';
 
-import 'package:flutter/material.dart';
-import 'package:islamiii/ui/screens/home/tabs/ahadeth_tab.dart';
-
-import 'package:islamiii/ui/screens/home/tabs/quran_tab.dart';
-
-import 'package:islamiii/ui/screens/home/tabs/radio_tab.dart';
-
-import 'package:islamiii/ui/screens/home/tabs/sebha_tab.dart';
-
-import 'package:islamiii/ui/utils/app_colors.dart';
-import 'package:islamiii/ui/widgets/app_bar.dart';
-
-import '../../utils/app_asstes.dart';
-
-class Home extends StatefulWidget {
-  static const String routeName = "home";
+class Home extends StatelessWidget {
+  static const String routeName = '/home';
 
   const Home({super.key});
 
   @override
-  State<Home> createState() => _HomeState();
-}
-
-class _HomeState extends State<Home> {
-  int currentIndex = 1;
-  List<Widget> tabs = [QuranTab(), AhadethTab(), SebhaTab(), RadioTab()];
-
-  @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: const BoxDecoration(
-          image: DecorationImage(image: AssetImage(AppAssets.mainBackground))),
-      child: Scaffold(
-        appBar: buildAppBar(),
-        body: tabs[currentIndex],
-        backgroundColor: AppColors.transparent,
-        bottomNavigationBar: buildBottomNavBar(),
-      ),
-    );
-  }
+    ThemeProvider themeProvider = Provider.of<ThemeProvider>(context);
 
-  Widget buildBottomNavBar() {
-    return Theme(
-      data: ThemeData(canvasColor: AppColors.primary),
-      child: BottomNavigationBar(
-          onTap: (index) {
-            currentIndex = index;
-            setState(() {});
-          },
-          currentIndex: currentIndex,
-          backgroundColor: Colors.blue,
-          selectedItemColor: AppColors.accent,
-          items: const [
-            BottomNavigationBarItem(
-                icon: ImageIcon(AssetImage(AppAssets.icQuran)), label: "Quran"),
-            BottomNavigationBarItem(
-                icon: ImageIcon(AssetImage(AppAssets.icAhadeth)),
-                label: "Ahadeth"),
-            BottomNavigationBarItem(
-                icon: ImageIcon(AssetImage(AppAssets.icSebha)), label: "Sebha"),
-            BottomNavigationBarItem(
-                icon: ImageIcon(AssetImage(AppAssets.icRadio)), label: "Radio"),
-          ]),
+    return Container(
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          image: AssetImage(themeProvider.mainBackground),
+          fit: BoxFit.cover,
+        ),
+      ),
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        appBar: AppBar(
+          title: const Text('Home'),
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+        ),
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              IconButton(
+                icon: const Icon(Icons.home, size: 80),
+                onPressed: () {
+                  // يمكنك تعديل وظيفة التنقل هنا
+                  print('Home icon pressed');
+                },
+              ),
+              Text(
+                'Welcome to the Islamic App!',
+                style: TextStyle(
+                  fontSize: 24,
+                  color: themeProvider.currentThemeMode == ThemeMode.dark
+                      ? AppColors.white
+                      : AppColors.black,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

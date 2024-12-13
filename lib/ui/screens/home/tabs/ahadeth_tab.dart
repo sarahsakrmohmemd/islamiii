@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import '../../../../model/ahadeth.dart';
-import '../../../../utils/app_assets.dart';
+
 
 import '../../../utils/app_asstes.dart';
 import '../../../utils/app_colors.dart';
